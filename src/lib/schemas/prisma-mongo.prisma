@@ -1,0 +1,85 @@
+// Prisma schema for MongoDB to visualize storefront data model
+// datasource and generator blocks are illustrative; adjust as needed
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Region {
+  id           String   @id @map("_id") @default(auto()) @db.ObjectId
+  key          String   @unique // e.g., "us"
+  name         String
+  currencyCode String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Product {
+  id        String    @id @map("_id") @default(auto()) @db.ObjectId
+  title     String
+  handle    String    @unique
+  subtitle  String?
+  description String?
+  thumbnail String?
+  images    String[]
+  metadata  Json?
+  variants  Variant[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Variant {
+  id              String  @id @map("_id") @default(auto()) @db.ObjectId
+  productId       String  @db.ObjectId
+  product         Product @relation(fields: [productId], references: [id])
+  title           String
+  sku             String?
+  calculatedAmount Int
+  originalAmount   Int
+  currencyCode     String
+}
+
+model CartItem {
+  id        String  @id @map("_id") @default(auto()) @db.ObjectId
+  cartId    String  @db.ObjectId
+  variantId String  @db.ObjectId
+  title     String?
+  quantity  Int
+  unitPrice Int
+}
+
+model Cart {
+  id        String    @id @map("_id") @default(auto()) @db.ObjectId
+  email     String?
+  regionId  String    @db.ObjectId
+  items     CartItem[]
+  subtotal  Int       @default(0)
+  total     Int       @default(0)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Customer {
+  id        String   @id @map("_id") @default(auto()) @db.ObjectId
+  email     String   @unique
+  firstName String?
+  lastName  String?
+  phone     String?
+  metadata  Json?
+}
+
+model Order {
+  id        String   @id @map("_id") @default(auto()) @db.ObjectId
+  customerId String? @db.ObjectId
+  items     Json
+  subtotal  Int
+  total     Int
+  createdAt DateTime @default(now())
+}
+
+
