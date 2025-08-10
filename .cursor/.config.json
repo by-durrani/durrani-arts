@@ -1,0 +1,24 @@
+{
+    "$schema": "https://raw.githubusercontent.com/getcursor/cursor/main/packages/types/config.schema.json",
+    "rules": [
+        {
+            "path": "rules/frontend-refactor.md",
+            "description": "Refactor Medusa Storefront frontend to Tailwind-only, simplify utilities, remove region-based routing, and ensure consistent UI/UX across all pages."
+        }
+    ],
+    "knowledge": [
+        {
+            "path": "knowledge/llms-full.txt",
+            "description": "Full LLMs context and related documentation for assisting with frontend refactor."
+        },
+        {
+            "path": "knowledge/llms.txt",
+            "description": "Concise LLMs notes and links."
+        }
+    ],
+    "settings": {
+        "autoApplyRules": true,
+        "defaultTemperature": 0.2,
+        "maxContextTokens": 4000
+    }
+}

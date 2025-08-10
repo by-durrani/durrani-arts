@@ -1,0 +1,84 @@
+name: Project Rules
+description: Opinionated rules and conventions for this repository to help the AI act consistently.
+
+# Communication
+- Keep answers concise by default; expand only when asked or when code clarity requires it.
+- Use backticks for file, directory, function and class names. Use fenced code blocks for code.
+- Refer to code changes as "edits". Do not narrate inside code.
+
+# Coding
+- Prefer clarity over brevity. Use descriptive names (no 1–2 letter identifiers).
+- Match existing formatting and patterns in the touched files.
+- TypeScript: annotate exported APIs and function signatures. Avoid any/unsafe casts.
+- Control flow: use guard clauses; handle error/edge cases first; avoid deep nesting.
+- Comments: add only when non-obvious; explain "why", not "how".
+
+# File edits
+- Only modify files relevant to the task. Do not reformat unrelated code.
+- After non-trivial edits, update related types, imports, and tests if present.
+- Keep changes minimal but complete; avoid partial implementations.
+
+# Project specifics
+- Framework: Next.js App Router with TypeScript.
+- Avoid leaking secrets. Do not hardcode tokens or credentials.
+- Keep environment-specific values in environment variables; never commit secrets.
+
+# Knowledge usage
+- Prefer project knowledge in `.cursor/knowledge` when available over web search.
+- If knowledge conflicts with code, treat code as source of truth and propose a knowledge update.
+
+# Safety and tooling
+- Do not introduce new dependencies without explicit need. If needed, explain why.
+- When adding libraries, prefer lightweight, well-maintained options.
+
+# Pull requests / commits
+- Write clear commit messages summarizing the intent and impact.
+
+
+
+## Frontend Refactor Rules (Active)
+
+I am converting the Medusa Storefront frontend into my own simplified codebase. The goal is to keep the UI and UX consistent across the site while simplifying code and dependencies.
+
+---
+
+### Styling Rules
+1. Tailwind Only:
+   - Do not use Medusa-specific utility classes unless they are plain Tailwind classes.
+   - For new code, use only Tailwind classes or reusable custom Tailwind classes defined in this project.
+
+2. UI Consistency:
+   - Maintain the same padding, margin, spacing, and border-radius patterns used in Medusa’s design system.
+   - Examples:
+     - Cards: consistent padding (e.g., `p-4`), margin (`mb-4`), border radius (`rounded-lg`), shadow, and hover effects.
+     - Pages: top/bottom padding (`pt-8 pb-8`), consistent section spacing (`space-y-6`), responsive breakpoints.
+
+3. Detailed UI Guidance in Responses:
+   - When generating any page, include the complete Tailwind class setup for wrappers like `div` and `section` to ensure consistent UI.
+   - Briefly explain why key spacing or radius choices are applied.
+
+---
+
+### Code Simplification Rules
+1. Utilities:
+   - Prefer native JS or lodash over complex utility wrappers.
+   - Replace `isNull()` or duplicate checkers with lodash’s `isNil`, `isEmpty`, or direct JS checks.
+   - When a file uses such a utility, refactor it consistently across the codebase.
+
+2. Routes:
+   - Remove region-based routing complexity where feasible.
+   - Convert region logic to simple routes without unnecessary abstraction.
+
+---
+
+### Persistent Behavior
+- When refactoring, update existing code to follow these rules — not just new code.
+- Always replace non-Tailwind styling with Tailwind-based equivalents.
+
+---
+
+### Output Requirement
+When generating code:
+1. Apply the above rules first.
+2. Include Tailwind class names with short explanations for UI spacing and styling where non-obvious.
+3. Maintain consistent patterns across all pages.
