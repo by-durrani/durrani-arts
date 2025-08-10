@@ -1,4 +1,4 @@
-const checkEnvVariables = require("./check-env-variables")
+const checkEnvVariables = require("./check-env-variables");
 
 // checkEnvVariables()
 
@@ -42,6 +42,6 @@ const nextConfig = {
       },
     ],
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

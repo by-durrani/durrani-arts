@@ -631,22 +631,22 @@ export const storefrontData = {
       author: "Tech Team",
     },
   ],
-}
+};
 
 // Helper functions to use with the dummy data
 export const dummyAPI = {
   // Get products with optional filters
   getProducts: (limit = 20, offset = 0, collection_id = null, tags = []) => {
-    let products = storefrontData.featuredProducts
+    let products = storefrontData.featuredProducts;
 
     if (collection_id) {
-      products = products.filter((p) => p.collection.id === collection_id)
+      products = products.filter((p) => p.collection.id === collection_id);
     }
 
     if (tags.length > 0) {
       products = products.filter((p) =>
         p.tags.some((tag) => tags.includes(tag.value))
-      )
+      );
     }
 
     return {
@@ -654,29 +654,29 @@ export const dummyAPI = {
       count: products.length,
       offset,
       limit,
-    }
+    };
   },
 
   // Get single product by handle
   getProductByHandle: (handle: string) => {
-    return storefrontData.featuredProducts.find((p) => p.handle === handle)
+    return storefrontData.featuredProducts.find((p) => p.handle === handle);
   },
 
   // Get collections
   getCollections: () => {
     return {
       collections: storefrontData.collections,
-    }
+    };
   },
 
   // Get cart
   getCart: () => {
-    return storefrontData.cart
+    return storefrontData.cart;
   },
 
   // Get customer orders
   getOrders: () => {
-    return storefrontData.orders
+    return storefrontData.orders;
   },
 
   // Search products
@@ -685,7 +685,7 @@ export const dummyAPI = {
       (p) =>
         p.title.toLowerCase().includes(query.toLowerCase()) ||
         p.description.toLowerCase().includes(query.toLowerCase())
-    )
+    );
 
     return {
       hits: results.map((p) => ({
@@ -697,13 +697,13 @@ export const dummyAPI = {
       })),
       estimatedTotalHits: results.length,
       query,
-    }
+    };
   },
 
   // Get product reviews
   getProductReviews: (product_id: string) => {
-    return storefrontData.reviews.filter((r) => r.product_id === product_id)
+    return storefrontData.reviews.filter((r) => r.product_id === product_id);
   },
-}
+};
 
-export default storefrontData
+export default storefrontData;

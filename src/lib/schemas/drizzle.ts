@@ -1,5 +1,12 @@
 // Drizzle ORM schema (PostgreSQL) for a minimal storefront model
-import { pgTable, text, varchar, integer, timestamp, jsonb } from "drizzle-orm/pg-core"
+import {
+  pgTable,
+  text,
+  varchar,
+  integer,
+  timestamp,
+  jsonb,
+} from "drizzle-orm/pg-core";
 
 export const regions = pgTable("regions", {
   id: varchar("id", { length: 64 }).primaryKey(),
@@ -7,7 +14,7 @@ export const regions = pgTable("regions", {
   currencyCode: varchar("currency_code", { length: 3 }).notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
-})
+});
 
 export const products = pgTable("products", {
   id: varchar("id", { length: 64 }).primaryKey(),
@@ -19,7 +26,7 @@ export const products = pgTable("products", {
   metadata: jsonb("metadata"),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
-})
+});
 
 export const variants = pgTable("variants", {
   id: varchar("id", { length: 64 }).primaryKey(),
@@ -29,7 +36,7 @@ export const variants = pgTable("variants", {
   calculatedAmount: integer("calculated_amount").notNull(),
   originalAmount: integer("original_amount").notNull(),
   currencyCode: varchar("currency_code", { length: 3 }).notNull(),
-})
+});
 
 export const carts = pgTable("carts", {
   id: varchar("id", { length: 64 }).primaryKey(),
@@ -39,7 +46,7 @@ export const carts = pgTable("carts", {
   total: integer("total").default(0),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
-})
+});
 
 export const lineItems = pgTable("line_items", {
   id: varchar("id", { length: 64 }).primaryKey(),
@@ -48,7 +55,7 @@ export const lineItems = pgTable("line_items", {
   title: varchar("title", { length: 255 }),
   quantity: integer("quantity").notNull(),
   unitPrice: integer("unit_price").notNull(),
-})
+});
 
 export const customers = pgTable("customers", {
   id: varchar("id", { length: 64 }).primaryKey(),
@@ -57,7 +64,7 @@ export const customers = pgTable("customers", {
   lastName: varchar("last_name", { length: 255 }),
   phone: varchar("phone", { length: 64 }),
   metadata: jsonb("metadata"),
-})
+});
 
 export const orders = pgTable("orders", {
   id: varchar("id", { length: 64 }).primaryKey(),
@@ -65,6 +72,4 @@ export const orders = pgTable("orders", {
   total: integer("total").notNull(),
   subtotal: integer("subtotal").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
-})
-
-
+});

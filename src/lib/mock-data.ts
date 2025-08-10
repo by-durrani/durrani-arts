@@ -1,24 +1,24 @@
-import { HttpTypes } from "@medusajs/types"
+import { HttpTypes } from "@medusajs/types";
 
 // Single-region setup (no region switching)
 export const SINGLE_REGION: HttpTypes.StoreRegion = {
-  id: "reg_static_us",
-  name: "United States",
-  currency_code: "usd",
+  id: "reg_static_pk",
+  name: "Pakistan",
+  currency_code: "Rs",
   tax_code: null as unknown as any,
   automatic_taxes: false as unknown as any,
   // @ts-ignore - storefront code mainly relies on countries[].iso_2/display_name
   countries: [
     {
-      id: "cty_us",
-      iso_2: "us",
-      iso_3: "usa" as any,
-      display_name: "United States",
-      name: "United States" as any,
+      id: "cty_pk",
+      iso_2: "pk",
+      iso_3: "pk" as any,
+      display_name: "Pakistan",
+      name: "Pakistan" as any,
       num_code: null as any,
     },
   ],
-} as any
+} as any;
 
 // Minimal product/variant shapes used by the UI
 export const PRODUCTS: HttpTypes.StoreProduct[] = [
@@ -51,7 +51,7 @@ export const PRODUCTS: HttpTypes.StoreProduct[] = [
         calculated_price: {
           calculated_amount: 4900,
           original_amount: 5900,
-          currency_code: "usd",
+          currency_code: "pkr",
           // nested calculated_price structure is referenced by get-product-price
           calculated_price: {
             price_list_type: "default",
@@ -66,7 +66,7 @@ export const PRODUCTS: HttpTypes.StoreProduct[] = [
         calculated_price: {
           calculated_amount: 4900,
           original_amount: 5900,
-          currency_code: "usd",
+          currency_code: "pkr",
           calculated_price: {
             price_list_type: "default",
           } as any,
@@ -106,7 +106,7 @@ export const PRODUCTS: HttpTypes.StoreProduct[] = [
         calculated_price: {
           calculated_amount: 1900,
           original_amount: 2500,
-          currency_code: "usd",
+          currency_code: "pkr",
           calculated_price: {
             price_list_type: "default",
           } as any,
@@ -117,9 +117,9 @@ export const PRODUCTS: HttpTypes.StoreProduct[] = [
     type: null as any,
     metadata: {} as any,
   } as any,
-]
+];
 
-export type MutableCart = HttpTypes.StoreCart & { items: any[] }
+export type MutableCart = HttpTypes.StoreCart & { items: any[] };
 
 export const CART: MutableCart = {
   id: "cart_static",
@@ -138,7 +138,7 @@ export const CART: MutableCart = {
   item_subtotal: 0 as any,
   created_at: new Date().toISOString() as any,
   updated_at: new Date().toISOString() as any,
-} as any
+} as any;
 
 export const SHIPPING_OPTIONS: HttpTypes.StoreCartShippingOption[] = [
   {
@@ -149,14 +149,14 @@ export const SHIPPING_OPTIONS: HttpTypes.StoreCartShippingOption[] = [
     service_zone: null as any,
     data: {} as any,
   } as any,
-]
+];
 
 export const PAYMENT_PROVIDERS: HttpTypes.StorePaymentProvider[] = [
   {
     id: "manual",
     is_installed: true as any,
   } as any,
-]
+];
 
 export const COLLECTIONS: HttpTypes.StoreCollection[] = [
   {
@@ -175,7 +175,7 @@ export const COLLECTIONS: HttpTypes.StoreCollection[] = [
     updated_at: new Date().toISOString() as any,
     metadata: {} as any,
   } as any,
-]
+];
 
 export const CATEGORIES: HttpTypes.StoreProductCategory[] = [
   {
@@ -186,7 +186,7 @@ export const CATEGORIES: HttpTypes.StoreProductCategory[] = [
     category_children: [] as any,
     products: [] as any,
   } as any,
-]
+];
 
 export const CUSTOMER: HttpTypes.StoreCustomer = {
   id: "cus_static",
@@ -196,17 +196,15 @@ export const CUSTOMER: HttpTypes.StoreCustomer = {
   phone: null as any,
   metadata: {} as any,
   orders: [] as any,
-} as any
+} as any;
 
-export const ORDERS: HttpTypes.StoreOrder[] = []
+export const ORDERS: HttpTypes.StoreOrder[] = [];
 
 export function recalcCartTotals() {
   const itemsTotal = CART.items.reduce((sum, li: any) => {
-    return sum + (li.unit_price || 0) * (li.quantity || 0)
-  }, 0)
-  ;(CART as any).item_subtotal = itemsTotal
-  ;(CART as any).subtotal = itemsTotal
-  ;(CART as any).total = itemsTotal + (CART.shipping_methods[0]?.amount || 0)
+    return sum + (li.unit_price || 0) * (li.quantity || 0);
+  }, 0);
+  (CART as any).item_subtotal = itemsTotal;
+  (CART as any).subtotal = itemsTotal;
+  (CART as any).total = itemsTotal + (CART.shipping_methods[0]?.amount || 0);
 }
-
-
